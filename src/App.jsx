@@ -9,7 +9,7 @@ const App = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const posts = await PostService.getAll();
+        const posts = await PostService.getAllPosts();
         setPosts(posts);
       } catch (error) {
         console.log("error", error);

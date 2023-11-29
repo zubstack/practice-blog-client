@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import UserService from "../services/user";
 
 function Login() {
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  async function onSubmit(event) {
+    try {
+      event.preventDefault();
+      const result = await UserService.loginUser({ username, password });
+      console.log("result", result);
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center mx-auto md:h-screen lg:py-0 bg-blue-900">
@@ -9,7 +23,7 @@ function Login() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form className="space-y-4 md:space-y-6" onSubmit={onSubmit}>
               <div>
                 <label
                   htmlFor="username"
@@ -18,6 +32,9 @@ function Login() {
                   Your username
                 </label>
                 <input
+                  onChange={(event) => {
+                    setUsername(event.target.value);
+                  }}
                   type="username"
                   name="username"
                   id="username"
@@ -34,6 +51,9 @@ function Login() {
                   Password
                 </label>
                 <input
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                  }}
                   type="password"
                   name="password"
                   id="password"
@@ -71,7 +91,7 @@ function Login() {
               </div>
               <button
                 type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="w-full bg-black text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Sign in
               </button>

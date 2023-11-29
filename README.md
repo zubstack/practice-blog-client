@@ -1,8 +1,6 @@
-# React + Vite
+# Practice Blog Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Notas para mis mismo:
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Para integrar tailwind con React, tienes que fijarte si el compilador es create react app o vite. Me parece que la diferencia esta en que Vite se maneja con modulos por defecto.
+- No manejes los errores (puede ser con try/catch) en el mismo servicio sino en el componente que va a ocupar el servicio asincrono.
