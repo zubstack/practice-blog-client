@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Post from "./components/Post";
 import PostService from "./services/posts";
+import Login from "./components/Login";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -18,15 +19,19 @@ const App = () => {
   }, []);
   return (
     <div>
-      <h1>Blog list</h1>
-      <h2>Posts: </h2>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <Post post={post} />
-          </li>
-        ))}
-      </ul>
+      <h1 className="text-3xl font-bold text-center p-5 bg-gray-100">
+        Blog list
+      </h1>
+      <Login />
+      {/* <main className="p-4">
+        <ul className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {posts.map((post) => (
+            <li key={post.id}>
+              <Post post={post} />
+            </li>
+          ))}
+        </ul>
+      </main> */}
     </div>
   );
 };
