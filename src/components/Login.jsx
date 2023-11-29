@@ -1,5 +1,18 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import UserService from "../services/user";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  },
+});
 
 function Login() {
   const [username, setUsername] = useState(null);
@@ -12,6 +25,11 @@ function Login() {
       console.log("result", result);
     } catch (error) {
       console.log("error", error);
+
+      Toast.fire({
+        icon: "error",
+        title: error.response.data.error,
+      });
     }
   }
 
