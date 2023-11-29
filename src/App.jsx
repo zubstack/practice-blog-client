@@ -4,6 +4,7 @@ import PostService from "./services/posts";
 import Login from "./components/Login";
 
 const App = () => {
+  const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -17,13 +18,15 @@ const App = () => {
     };
     fetchPosts();
   }, []);
+
+  if (!user) return <Login setUser={setUser} />;
+
   return (
     <div>
       <h1 className="text-3xl font-bold text-center p-5 bg-gray-100">
         Blog list
       </h1>
-      <Login />
-      {/* <main className="p-4">
+      <main className="p-4">
         <ul className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {posts.map((post) => (
             <li key={post.id}>
@@ -31,7 +34,7 @@ const App = () => {
             </li>
           ))}
         </ul>
-      </main> */}
+      </main>
     </div>
   );
 };

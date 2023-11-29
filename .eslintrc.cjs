@@ -13,11 +13,11 @@ module.exports = {
   plugins: ["react", "jsx-a11y", "import"],
   rules: {
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+    "react/prop-types": false,
 
     // "react-refresh/only-export-components": [
     //   "warn",
     //   { allowConstantExport: true },
     // ],
-    // "react/prop-types": false,
   },
 };

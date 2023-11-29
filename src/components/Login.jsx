@@ -14,15 +14,15 @@ const Toast = Swal.mixin({
   },
 });
 
-function Login() {
+function Login({ setUser }) {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
-  async function onSubmit(event) {
+  async function handleLogin(event) {
     try {
       event.preventDefault();
-      const result = await UserService.loginUser({ username, password });
-      console.log("result", result);
+      const { token } = await UserService.loginUser({ username, password });
+      setUser(token);
     } catch (error) {
       console.log("error", error);
 
@@ -41,7 +41,7 @@ function Login() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" onSubmit={onSubmit}>
+            <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
               <div>
                 <label
                   htmlFor="username"
@@ -50,8 +50,8 @@ function Login() {
                   Your username
                 </label>
                 <input
-                  onChange={(event) => {
-                    setUsername(event.target.value);
+                  onChange={({ target }) => {
+                    setUsername(target.value);
                   }}
                   type="username"
                   name="username"
@@ -69,8 +69,8 @@ function Login() {
                   Password
                 </label>
                 <input
-                  onChange={(event) => {
-                    setPassword(event.target.value);
+                  onChange={({ target }) => {
+                    setPassword(target.value);
                   }}
                   type="password"
                   name="password"
