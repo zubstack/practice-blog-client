@@ -4,9 +4,10 @@ import { API_URL } from "../utils/config";
 const posts_endpoint = "/api/posts";
 const baseUrl = `${API_URL}${posts_endpoint}`;
 
-const getAllPosts = () => {
+const getAllPosts = async () => {
   const request = axios.get(baseUrl);
-  return request.then((response) => response.data);
+  const response = await request;
+  return response.data;
 };
 
 const createPost = async (token, data) => {
@@ -14,5 +15,14 @@ const createPost = async (token, data) => {
     headers: { Authorization: `Bearer ${token}` },
   });
 };
+const toggleLike = async (token, id) => {
+  return await axios.patch(
+    `${baseUrl}/${id}`,
+    {},
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+};
 
-export default { getAllPosts, createPost };
+export default { getAllPosts, createPost, toggleLike };

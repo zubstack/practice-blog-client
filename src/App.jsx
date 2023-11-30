@@ -40,7 +40,17 @@ const App = () => {
       <hr />
 
       <Routes>
-        <Route path="/" element={<Home user={user} posts={posts} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              token={token}
+              fetchPosts={fetchPosts}
+              user={user}
+              posts={posts}
+            />
+          }
+        />
         <Route
           path="/compose"
           element={<Compose token={token} fetchPosts={fetchPosts} />}

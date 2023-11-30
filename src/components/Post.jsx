@@ -1,8 +1,19 @@
 import { useState } from "react";
+import PostService from "../services/posts.js";
 import { FaChevronDown, FaHeart } from "react-icons/fa";
 
-const Post = ({ post }) => {
+const { toggleLike } = PostService;
+
+const Post = ({ post, token, fetchPosts }) => {
   const [toggleDetails, setToggleDetails] = useState(false);
+  const handleToggle = async () => {
+    try {
+      await toggleLike(token, post.id);
+      fetchPosts();
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   return (
     <div
@@ -25,7 +36,9 @@ const Post = ({ post }) => {
           </h5>
         </a>
       </div>
-      {toggleDetails && <PostDetails post={post} />}
+      {toggleDetails && (
+        <PostDetails handleToggle={handleToggle} token={token} post={post} />
+      )}
       <div className="flex justify-end px-5">
         <button
           onClick={() => setToggleDetails(!toggleDetails)}
@@ -39,7 +52,7 @@ const Post = ({ post }) => {
   );
 };
 
-const PostDetails = ({ post }) => (
+const PostDetails = ({ post, handleToggle }) => (
   <div className="px-4 mb-4">
     <p className="mb-2 text-sm text-gray-600">@{post.user.username}</p>
     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
@@ -63,9 +76,12 @@ const PostDetails = ({ post }) => (
           <path stroke="currentColor" d="M1 5h12m0 0L9 1m4 4L9 9" />
         </svg>
       </a>
-      <button className="flex items-center gap-2 text-slate-700">
+      <button
+        onClick={handleToggle}
+        className="flex items-center gap-2 text-slate-700"
+      >
         <FaHeart />
-        {post.likes}
+        {post.likes.length}
       </button>
     </div>
   </div>

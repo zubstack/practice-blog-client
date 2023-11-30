@@ -27,7 +27,7 @@ function Compose({ token, fetchPosts }) {
       console.log("error", error);
       Toast.fire({
         icon: "error",
-        title: error.response.data.error,
+        title: error.response.data.message,
       });
     }
   }

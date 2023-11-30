@@ -20,7 +20,7 @@ function Login({ setUser, setToken }) {
 
       Toast.fire({
         icon: "error",
-        title: error.response.data.error,
+        title: error.response.data.message,
       });
     }
   }
