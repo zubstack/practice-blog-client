@@ -14,15 +14,19 @@ const Toast = Swal.mixin({
   },
 });
 
-function Login({ setUser }) {
+function Login({ setUser, setToken }) {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
   async function handleLogin(event) {
     try {
       event.preventDefault();
-      const { token } = await UserService.loginUser({ username, password });
-      setUser(token);
+      const { token, username: user_name } = await UserService.loginUser({
+        username,
+        password,
+      });
+      setToken(token);
+      setUser(user_name);
     } catch (error) {
       console.log("error", error);
 

@@ -8,7 +8,7 @@ function UserInformation({ user }) {
       </p>
 
       <p>
-        <strong>Username: </strong> username
+        <strong>Username: </strong> {user}
       </p>
     </section>
   );

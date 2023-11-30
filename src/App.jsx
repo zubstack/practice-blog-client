@@ -3,10 +3,17 @@ import Post from "./components/Post";
 import PostService from "./services/posts";
 import Login from "./components/Login";
 import UserInformation from "./components/UserInformation";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [token, setToken] = useLocalStorage("userToken", "");
+  const [user, setUser] = useLocalStorage("userData", "");
   const [posts, setPosts] = useState([]);
+
+  function logOut() {
+    setToken("");
+    localStorage.removeItem("userToken");
+  }
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -20,13 +27,21 @@ const App = () => {
     fetchPosts();
   }, []);
 
-  if (!user) return <Login setUser={setUser} />;
+  if (!token) return <Login setUser={setUser} setToken={setToken} />;
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center p-5 bg-gray-100">
-        Blog list
-      </h1>
+      <nav className="flex justify-between items-center px-4">
+        <h1 className="text-3xl font-bold text-center p-5 bg-gray-100">
+          Blog list
+        </h1>
+        <button
+          onClick={logOut}
+          className="bg-slate-700 text-white p-3 hover:bg-black"
+        >
+          Sign out
+        </button>
+      </nav>
 
       <main className="p-4">
         <UserInformation user={user} />
