@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import Post from "./components/Post";
 import PostService from "./services/posts";
 import Login from "./components/Login";
-import UserInformation from "./components/UserInformation";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Compose from "./components/Compose";
+import Nav from "./components/Nav";
 
 const App = () => {
   const [token, setToken] = useLocalStorage("userToken", "");
@@ -12,7 +14,7 @@ const App = () => {
 
   function logOut() {
     setToken("");
-    localStorage.removeItem("userToken");
+    window.localStorage.clear();
   }
 
   useEffect(() => {
@@ -30,32 +32,16 @@ const App = () => {
   if (!token) return <Login setUser={setUser} setToken={setToken} />;
 
   return (
-    <div>
-      <nav className="flex justify-between items-center px-4">
-        <h1 className="text-3xl font-bold text-center p-5 bg-gray-100">
-          Blog list
-        </h1>
-        <button
-          onClick={logOut}
-          className="bg-slate-700 text-white p-3 hover:bg-black"
-        >
-          Sign out
-        </button>
-      </nav>
+    <BrowserRouter>
+      <Nav logOut={logOut} />
 
-      <main className="p-4">
-        <UserInformation user={user} />
-        <section className="p-10">
-          <ul className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {posts.map((post) => (
-              <li key={post.id}>
-                <Post post={post} />
-              </li>
-            ))}
-          </ul>
-        </section>
-      </main>
-    </div>
+      <hr />
+
+      <Routes>
+        <Route path="/" element={<Home user={user} posts={posts} />} />
+        <Route path="/compose" element={<Compose />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
