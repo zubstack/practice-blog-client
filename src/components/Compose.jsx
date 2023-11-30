@@ -17,7 +17,10 @@ function Compose({ token, fetchPosts }) {
       event.preventDefault();
       const data = { title, author, url };
       await PostService.createPost(token, data);
-      console.log("Succesfully posted!");
+      Toast.fire({
+        icon: "success",
+        title: "Successfully created!",
+      });
       fetchPosts();
       navigate("/");
     } catch (error) {
