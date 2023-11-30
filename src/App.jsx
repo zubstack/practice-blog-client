@@ -21,14 +21,21 @@ const App = () => {
     try {
       console.log("Fetching posts");
       const posts = await PostService.getAllPosts();
-      setPosts(posts);
+      //By default: sorting by likes
+      const postsSorted = [...posts].sort(
+        (a, b) => b.likes.length - a.likes.length
+      );
+      setPosts(postsSorted);
     } catch (error) {
       console.log("error", error);
     }
   };
+
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  console.log("postss", posts);
 
   if (!token) return <Login setUser={setUser} setToken={setToken} />;
 
