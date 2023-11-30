@@ -12,6 +12,7 @@ const App = () => {
   const [user, setUser] = useLocalStorage("userData", "");
   const [posts, setPosts] = useState([]);
 
+  console.log("posts", posts);
   function logOut() {
     setToken("");
     window.localStorage.clear();
