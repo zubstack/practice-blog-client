@@ -1,18 +1,6 @@
 import { useState } from "react";
-import Swal from "sweetalert2";
-import UserService from "../services/user";
-
-const Toast = Swal.mixin({
-  toast: true,
-  position: "top-end",
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer;
-    toast.onmouseleave = Swal.resumeTimer;
-  },
-});
+import UserService from "../services/users";
+import { Toast } from "../utils/alert_config";
 
 function Login({ setUser, setToken }) {
   const [username, setUsername] = useState(null);

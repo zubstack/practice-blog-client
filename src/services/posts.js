@@ -9,4 +9,10 @@ const getAllPosts = () => {
   return request.then((response) => response.data);
 };
 
-export default { getAllPosts };
+const createPost = async (token, data) => {
+  return await axios.post(baseUrl, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+export default { getAllPosts, createPost };

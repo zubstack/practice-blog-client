@@ -17,15 +17,16 @@ const App = () => {
     window.localStorage.clear();
   }
 
+  const fetchPosts = async () => {
+    try {
+      console.log("Fetching posts");
+      const posts = await PostService.getAllPosts();
+      setPosts(posts);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const posts = await PostService.getAllPosts();
-        setPosts(posts);
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
     fetchPosts();
   }, []);
 
@@ -39,7 +40,10 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Home user={user} posts={posts} />} />
-        <Route path="/compose" element={<Compose />} />
+        <Route
+          path="/compose"
+          element={<Compose token={token} fetchPosts={fetchPosts} />}
+        />
       </Routes>
     </BrowserRouter>
   );
