@@ -49,7 +49,7 @@ const App = () => {
           path="/"
           element={
             <Home
-              token={{ token }}
+              token={token}
               fetchPosts={fetchPosts}
               user={user}
               posts={posts}
