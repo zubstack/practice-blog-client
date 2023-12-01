@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import PostService from "../services/posts.js";
 import { FaChevronDown, FaHeart } from "react-icons/fa";
 
@@ -86,5 +87,11 @@ const PostDetails = ({ post, handleToggle }) => (
     </div>
   </div>
 );
+
+Post.propTypes = {
+  post: PropTypes.object.isRequired,
+  token: PropTypes.string.isRequired,
+  fetchPosts: PropTypes.func.isRequired,
+};
 
 export default Post;
