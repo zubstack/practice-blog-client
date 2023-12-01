@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Compose from "./components/Compose";
 import Nav from "./components/Nav";
+import UserPosts from "./components/UserPosts";
 
 const App = () => {
   const [token, setToken] = useLocalStorage("userToken", "");
@@ -35,8 +36,6 @@ const App = () => {
     fetchPosts();
   }, []);
 
-  console.log("postss", posts);
-
   if (!token) return <Login setUser={setUser} setToken={setToken} />;
 
   return (
@@ -61,6 +60,7 @@ const App = () => {
           path="/compose"
           element={<Compose token={token} fetchPosts={fetchPosts} />}
         />
+        <Route path="/user-posts" element={<UserPosts token={token} />} />
       </Routes>
     </BrowserRouter>
   );

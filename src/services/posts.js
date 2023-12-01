@@ -10,6 +10,13 @@ const getAllPosts = async () => {
   return response.data;
 };
 
+const getUserPosts = async (token) => {
+  const { data } = await axios.get(`${baseUrl}/user-posts`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return data;
+};
+
 const createPost = async (token, data) => {
   return await axios.post(baseUrl, data, {
     headers: { Authorization: `Bearer ${token}` },
@@ -25,4 +32,20 @@ const toggleLike = async (token, id) => {
   );
 };
 
-export default { getAllPosts, createPost, toggleLike };
+const deletePost = async (token, id) => {
+  return await axios.delete(
+    `${baseUrl}/${id}`,
+
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+};
+
+export default {
+  getAllPosts,
+  createPost,
+  toggleLike,
+  getUserPosts,
+  deletePost,
+};

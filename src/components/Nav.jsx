@@ -9,6 +9,9 @@ function Nav({ logOut }) {
 
       <ul className="flex items-center gap-4">
         <li className="text-slate-700">
+          <Link to="/user-posts">My posts</Link>
+        </li>
+        <li className="text-slate-700">
           <Link to="/compose">Compose</Link>
         </li>
         <li>

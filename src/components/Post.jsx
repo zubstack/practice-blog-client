@@ -18,7 +18,7 @@ const Post = ({ post, token, fetchPosts }) => {
   return (
     <div
       id="posts__container"
-      className="max-w-sm bg-white border border-gray-600 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      className="max-w-sm bg-white border border-gray-400 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
       {!toggleDetails && (
         <div className="flex justify-center mt-2">
