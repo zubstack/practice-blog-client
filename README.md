@@ -17,3 +17,5 @@ Post.propTypes = {
 ```
 
 Al dejar claro que tipo de dato se espera recibir en cada componente, sera mucho mas facil descubrir si algun error en el componente tiene que ver con este tipo.
+
+//Me gusta hacer codigo, pero hoy me centrare en planificar
