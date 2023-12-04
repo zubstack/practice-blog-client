@@ -17,7 +17,7 @@ const App = () => {
     setToken("");
     window.localStorage.clear();
   }
-
+  //PENDING: Handle desconnection from server
   const fetchPosts = async () => {
     try {
       console.log("Fetching posts");
