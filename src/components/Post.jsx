@@ -79,7 +79,7 @@ const PostDetails = ({ post, handleToggle }) => (
       </a>
       <button
         onClick={handleToggle}
-        className="flex items-center gap-2 text-slate-700"
+        className="likes flex items-center gap-2 text-slate-700"
       >
         <FaHeart />
         {post.likes.length}
