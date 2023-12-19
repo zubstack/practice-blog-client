@@ -1,5 +1,11 @@
 # Practice Blog Client
 
+### Funciones:
+
+- Usuarios
+- Leer blogs ajenos y propios
+- Crear y editar tus propios blogs
+
 Notas para mis mismo:
 
 - Para integrar tailwind con React, tienes que fijarte si el compilador es create react app o vite. Me parece que la diferencia esta en que Vite se maneja con modulos por defecto.

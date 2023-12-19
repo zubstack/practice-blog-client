@@ -1,5 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+import { prettyDOM } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Post from "../components/Post";
 
@@ -16,11 +17,15 @@ const token = "dnoifhr8349trh934fjoijerasf";
 const fetchPosts = () => {
   console.log("fethching posts");
 };
-test("renders content", () => {
-  render(<Post post={post} token={token} fetchPosts={fetchPosts} />);
 
-  const element = screen.getByText("El cielo azul - Cristian Castro");
-  expect(element).toBeDefined();
+test("renders content", () => {
+  const component = render(
+    <Post post={post} token={token} fetchPosts={fetchPosts} />
+  );
+
+  component.getByText("El cielo azul - Cristian Castro");
+  const detailsButton = component.container.querySelector("button");
+  console.log(prettyDOM(detailsButton));
 });
 
 test("Button for show details is shown", () => {
